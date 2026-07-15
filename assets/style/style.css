@@ -212,16 +212,16 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 .hero-pip.active { background: var(--gold); border-color: var(--gold); }
 
 .hero-stats {
-  position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
   display: grid; grid-template-columns: repeat(4,1fr);
-  border-top: 1px solid rgba(255,255,255,0.08);
-  background: rgba(45,45,29,0.75); backdrop-filter: blur(12px);
+  background: var(--green);
+  width: 100%;
+  padding: 1.5rem 0;
 }
 @media (max-width: 639px) { .hero-stats { grid-template-columns: repeat(2,1fr); } }
 
 .hero-stat {
   padding: 1.25rem 1rem; text-align: center;
-  border-left: 1px solid rgba(255,255,255,0.06);
+  border-left: 1px solid rgba(255,255,255,0.08);
 }
 [lang="en"] .hero-stat { border-left: none; border-right: 1px solid rgba(255,255,255,0.06); }
 .hero-stat:last-child { border-left: none; border-right: none; }
