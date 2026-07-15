@@ -736,6 +736,9 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 
 .cform-submit { margin-top: 0.5rem; width: 100%; justify-content: center; }
 .cform-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.submit-loader { display: none; }
+.cform-submit.loading .submit-text { display: none; }
+.cform-submit.loading .submit-loader { display: inline-flex; align-items: center; gap: 0.5rem; }
 
 /* ─── FOOTER ─── */
 .footer { background: var(--green); color: rgba(255,255,255,0.65); border-top: 1px solid var(--line-dk); }
