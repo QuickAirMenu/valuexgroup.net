@@ -532,7 +532,47 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
   .appr-line { left: 50% !important; right: auto !important; transform: translateX(-50%); width: 2px; }
 }
 .appr-steps { display: flex; flex-direction: column; gap: 2rem; }
-.appr-step { display: grid; gap: 1rem; position: relative; }
+.appr-step { display: grid; gap: 1rem; position: relative; animation: fadeSlideIn 0.6s ease both; }
+.appr-step:nth-child(1) { animation-delay: 0.1s; }
+.appr-step:nth-child(2) { animation-delay: 0.2s; }
+.appr-step:nth-child(3) { animation-delay: 0.3s; }
+.appr-step:nth-child(4) { animation-delay: 0.4s; }
+.appr-step:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.appr-arrow {
+  display: none;
+}
+@media (min-width: 768px) {
+  .appr-arrow {
+    display: block;
+    position: absolute; top: 1.125rem;
+    width: 2rem; height: 2px;
+    background: var(--gold);
+  }
+  [lang="ar"] .appr-arrow { left: 3.5rem; right: auto; transform: rotate(0deg); }
+  [lang="en"] .appr-arrow { right: 3.5rem; left: auto; }
+  .appr-step:nth-child(even) .appr-arrow {
+    [lang="ar"] & { left: auto; right: 3.5rem; }
+    [lang="en"] & { right: auto; left: 3.5rem; }
+  }
+  .appr-arrow::after {
+    content: '';
+    position: absolute; right: -1px; top: 50%;
+    transform: translateY(-50%);
+    border: 5px solid transparent;
+    border-left-color: var(--gold);
+  }
+  [lang="ar"] .appr-arrow::after {
+    right: auto; left: -1px;
+    border-left-color: transparent;
+    border-right-color: var(--gold);
+  }
+}
 [lang="ar"] .appr-step { padding-right: 3.5rem; }
 [lang="en"] .appr-step { padding-left: 3.5rem; }
 @media (min-width: 768px) {
