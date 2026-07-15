@@ -543,36 +543,6 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
-.appr-arrow {
-  display: none;
-}
-@media (min-width: 768px) {
-  .appr-arrow {
-    display: block;
-    position: absolute; top: 1.125rem;
-    width: 2rem; height: 2px;
-    background: var(--gold);
-  }
-  [lang="ar"] .appr-arrow { left: 3.5rem; right: auto; transform: rotate(0deg); }
-  [lang="en"] .appr-arrow { right: 3.5rem; left: auto; }
-  .appr-step:nth-child(even) .appr-arrow {
-    [lang="ar"] & { left: auto; right: 3.5rem; }
-    [lang="en"] & { right: auto; left: 3.5rem; }
-  }
-  .appr-arrow::after {
-    content: '';
-    position: absolute; right: -1px; top: 50%;
-    transform: translateY(-50%);
-    border: 5px solid transparent;
-    border-left-color: var(--gold);
-  }
-  [lang="ar"] .appr-arrow::after {
-    right: auto; left: -1px;
-    border-left-color: transparent;
-    border-right-color: var(--gold);
-  }
-}
 [lang="ar"] .appr-step { padding-right: 3.5rem; }
 [lang="en"] .appr-step { padding-left: 3.5rem; }
 @media (min-width: 768px) {
@@ -619,6 +589,28 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 .appr-card:hover .appr-icon { background: var(--gold); color: var(--white); border-color: var(--gold); transform: scale(1.05); }
 .appr-card h4 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--green); margin-bottom: 0.5rem; }
 .appr-card p { font-size: 0.875rem; color: var(--gray-500); line-height: 1.7; }
+
+.appr-arrow {
+  position: absolute; top: 1.25rem;
+  width: 2rem; height: 0;
+  border-top: 2px solid var(--gold);
+}
+html[dir="rtl"] .appr-arrow { left: 3.5rem; }
+html[dir="ltr"] .appr-arrow { right: 3.5rem; }
+.appr-arrow::after {
+  content: '';
+  position: absolute; top: -6px;
+  width: 0; height: 0;
+  border: 5px solid transparent;
+}
+html[dir="rtl"] .appr-arrow::after {
+  left: -2px;
+  border-right-color: var(--gold);
+}
+html[dir="ltr"] .appr-arrow::after {
+  right: -2px;
+  border-left-color: var(--gold);
+}
 
 /* ─── TESTIMONIALS ─── */
 .testi-grid { display: grid; gap: 1.5rem; }
