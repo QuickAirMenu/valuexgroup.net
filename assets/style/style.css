@@ -531,8 +531,8 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 @media (min-width: 768px) {
   .appr-line { left: 50% !important; right: auto !important; transform: translateX(-50%); width: 2px; }
 }
-.appr-steps { display: flex; flex-direction: column; gap: 2rem; }
-.appr-step { display: grid; gap: 1rem; position: relative; animation: fadeSlideIn 0.6s ease both; }
+.appr-steps { display: flex; flex-direction: column; gap: 0; }
+.appr-step { display: grid; gap: 0; position: relative; padding: 1.25rem 0; animation: fadeSlideIn 0.6s ease both; }
 .appr-step:nth-child(1) { animation-delay: 0.1s; }
 .appr-step:nth-child(2) { animation-delay: 0.2s; }
 .appr-step:nth-child(3) { animation-delay: 0.3s; }
@@ -551,66 +551,43 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
   .appr-step:nth-child(even) .appr-marker { order: 2; justify-self: start; }
 }
 .appr-marker {
-  position: absolute; top: 0;
-  width: 2.25rem; height: 2.25rem; border-radius: 50%;
+  position: absolute; top: 1.25rem;
+  width: 2rem; height: 2rem; border-radius: 50%;
   background: var(--gold); color: var(--white);
   border: 3px solid var(--white);
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-display); font-size: 0.75rem; font-weight: 800; z-index: 2;
-  box-shadow: 0 4px 12px rgba(205,170,114,0.3);
+  font-family: var(--font-display); font-size: 0.65rem; font-weight: 800; z-index: 2;
+  box-shadow: 0 3px 10px rgba(205,170,114,0.35);
 }
-[lang="ar"] .appr-marker { right: 1rem; }
-[lang="en"] .appr-marker { left: 1rem; }
+[lang="ar"] .appr-marker { right: 0.5rem; }
+[lang="en"] .appr-marker { left: 0.5rem; }
 @media (min-width: 768px) {
   .appr-marker { position: static; justify-self: end; width: 3rem; height: 3rem; font-size: 0.875rem; }
   .appr-step:nth-child(even) .appr-marker { justify-self: start; }
 }
 .appr-card {
   background: var(--white); border: 1px solid var(--gray-200);
-  padding: 2rem; transition: all 0.4s ease;
+  padding: 1.75rem; transition: all 0.4s ease;
   position: relative; overflow: hidden;
 }
 .appr-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0;
-  height: 3px; background: linear-gradient(90deg, var(--gold), transparent);
+  height: 3px; background: var(--gold);
   transform: scaleX(0); transform-origin: left;
   transition: transform 0.4s ease;
 }
 [lang="ar"] .appr-card::before { transform-origin: right; }
 .appr-card:hover::before { transform: scaleX(1); }
-.appr-card:hover { border-color: var(--gold); box-shadow: 0 12px 36px rgba(0,0,0,0.08); transform: translateY(-4px); }
+.appr-card:hover { border-color: var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.07); transform: translateY(-3px); }
 .appr-icon {
-  width: 3.5rem; height: 3.5rem; background: var(--gold-dim);
+  width: 3rem; height: 3rem; background: var(--gold-dim);
   display: flex; align-items: center; justify-content: center;
-  color: var(--gold); font-size: 1.3rem;
-  margin-bottom: 1rem; transition: all 0.4s ease;
-  border: 1px solid rgba(205,170,114,0.2);
+  color: var(--gold); font-size: 1.15rem;
+  margin-bottom: 0.875rem; transition: all 0.4s ease;
 }
-.appr-card:hover .appr-icon { background: var(--gold); color: var(--white); border-color: var(--gold); transform: scale(1.05); }
-.appr-card h4 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--green); margin-bottom: 0.5rem; }
-.appr-card p { font-size: 0.875rem; color: var(--gray-500); line-height: 1.7; }
-
-.appr-arrow {
-  position: absolute; top: 1.25rem;
-  width: 2rem; height: 0;
-  border-top: 2px solid var(--gold);
-}
-html[dir="rtl"] .appr-arrow { left: 3.5rem; }
-html[dir="ltr"] .appr-arrow { right: 3.5rem; }
-.appr-arrow::after {
-  content: '';
-  position: absolute; top: -6px;
-  width: 0; height: 0;
-  border: 5px solid transparent;
-}
-html[dir="rtl"] .appr-arrow::after {
-  left: -2px;
-  border-right-color: var(--gold);
-}
-html[dir="ltr"] .appr-arrow::after {
-  right: -2px;
-  border-left-color: var(--gold);
-}
+.appr-card:hover .appr-icon { background: var(--gold); color: var(--white); }
+.appr-card h4 { font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; color: var(--green); margin-bottom: 0.4rem; }
+.appr-card p { font-size: 0.8125rem; color: var(--gray-500); line-height: 1.7; }
 
 /* ─── TESTIMONIALS ─── */
 .testi-grid { display: grid; gap: 1.5rem; }
