@@ -415,7 +415,12 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 .vm-card:hover { background: var(--white); box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
 
 .vm-icon {
-  display: none;
+  width: 2.75rem; height: 2.75rem;
+  background: var(--gold-dim);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: 1rem;
+  margin-bottom: 0.875rem;
+  flex-shrink: 0;
 }
 .vm-card h4 {
   font-size: 1rem; color: var(--green); margin-bottom: 0.35rem;
