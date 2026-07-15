@@ -750,17 +750,19 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 .footer-brand p { font-size: 0.8125rem; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 20rem; margin-bottom: 1.25rem; }
 .footer-social { display: flex; gap: 0.625rem; }
 .footer-social a {
-  width: 2.25rem; height: 2.25rem; border: 1px solid rgba(255,255,255,0.1);
+  width: 2.5rem; height: 2.5rem; border: 1px solid rgba(255,255,255,0.12);
   display: flex; align-items: center; justify-content: center;
   color: rgba(255,255,255,0.45); font-size: 1rem; transition: all 0.3s;
+  border-radius: 6px;
 }
-.footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+.footer-social a:hover { border-color: var(--gold); color: var(--gold); background: rgba(205,170,114,0.08); }
 
 .footer-links h4 { font-size: 0.6875rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; font-weight: 600; }
 .footer-links a {
-  display: flex; align-items: center; gap: 0.4rem;
+  display: flex; align-items: center; gap: 0.5rem;
   font-size: 0.8125rem; color: rgba(255,255,255,0.48);
-  margin-bottom: 0.45rem; transition: color 0.3s; line-height: 1.6;
+  margin-bottom: 0.6rem; transition: color 0.3s; line-height: 1.6;
+  padding: 0.25rem 0;
 }
 [lang="ar"] .footer-links a { flex-direction: row; }
 .footer-links a:hover { color: var(--gold); }
