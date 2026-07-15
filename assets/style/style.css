@@ -601,11 +601,19 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 }
 
 .testi-card {
-  background: var(--green-2); padding: 3rem;
+  background: linear-gradient(135deg, var(--green-2), var(--green-3));
+  padding: 3rem;
   border: 1px solid rgba(255,255,255,0.06);
   transition: all 0.4s ease; display: flex; flex-direction: column;
   max-width: 50rem; margin: 0 auto;
   text-align: center;
+  position: relative;
+  border-radius: 4px;
+}
+.testi-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 .testi-quote { font-size: 3rem; color: var(--gold); margin-bottom: 1.5rem; opacity: 0.4; line-height: 1; }
 .testi-card p {
