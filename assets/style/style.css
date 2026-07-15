@@ -524,7 +524,7 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 .appr-timeline { position: relative; max-width: 55rem; margin: 0 auto; }
 .appr-line {
   position: absolute; top: 0; bottom: 0;
-  width: 1.5px; background: var(--gray-200);
+  width: 1.5px; background: linear-gradient(180deg, var(--gold), var(--gray-200));
 }
 [lang="ar"] .appr-line { right: 1.75rem; }
 [lang="en"] .appr-line { left: 1.75rem; }
@@ -543,10 +543,11 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 .appr-marker {
   position: absolute; top: 0;
   width: 2.25rem; height: 2.25rem; border-radius: 50%;
-  background: var(--green); color: var(--gold);
+  background: var(--gold); color: var(--white);
   border: 3px solid var(--white);
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-size: 0.75rem; font-weight: 800; z-index: 2;
+  box-shadow: 0 4px 12px rgba(205,170,114,0.3);
 }
 [lang="ar"] .appr-marker { right: 1rem; }
 [lang="en"] .appr-marker { left: 1rem; }
@@ -556,17 +557,27 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 }
 .appr-card {
   background: var(--white); border: 1px solid var(--gray-200);
-  padding: 2rem; transition: all 0.3s;
+  padding: 2rem; transition: all 0.4s ease;
+  position: relative; overflow: hidden;
 }
-.appr-card:hover { border-color: var(--gold); box-shadow: 0 8px 28px rgba(0,0,0,0.06); transform: translateY(-3px); }
+.appr-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: linear-gradient(90deg, var(--gold), transparent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s ease;
+}
+[lang="ar"] .appr-card::before { transform-origin: right; }
+.appr-card:hover::before { transform: scaleX(1); }
+.appr-card:hover { border-color: var(--gold); box-shadow: 0 12px 36px rgba(0,0,0,0.08); transform: translateY(-4px); }
 .appr-icon {
-  width: 3rem; height: 3rem; background: var(--gold-dim);
+  width: 3.5rem; height: 3.5rem; background: var(--gold-dim);
   display: flex; align-items: center; justify-content: center;
-  color: var(--gold); font-size: 1.25rem;
-  margin-bottom: 0.875rem; transition: all 0.3s;
+  color: var(--gold); font-size: 1.3rem;
+  margin-bottom: 1rem; transition: all 0.4s ease;
+  border: 1px solid rgba(205,170,114,0.2);
 }
-.appr-card:hover .appr-icon { background: var(--gold); color: var(--green); }
-.appr-card h4 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--green); margin-bottom: 0.5rem; }
+.appr-card:hover .appr-icon { background: var(--gold); color: var(--white); border-color: var(--gold); transform: scale(1.05); }
+.appr-card h4 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--green); margin-bottom: 0.5rem; }
 .appr-card p { font-size: 0.875rem; color: var(--gray-500); line-height: 1.7; }
 
 /* ─── TESTIMONIALS ─── */
