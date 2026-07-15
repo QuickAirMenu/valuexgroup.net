@@ -386,14 +386,14 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 
 .about-tag {
   position: absolute; bottom: -1.5rem;
-  background: var(--green);
-  padding: 0.875rem 2rem;
-  font-family: var(--font-display); font-size: 0.875rem; font-weight: 600;
-  color: var(--white);
-  letter-spacing: 0.15em;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+  background: var(--gold);
+  padding: 0.75rem 2rem;
+  font-family: var(--font-display); font-size: 0.8125rem; font-weight: 600;
+  color: var(--green);
+  letter-spacing: 0.2em;
+  box-shadow: 0 6px 20px rgba(205,170,114,0.35);
 }
-.about-tag span { color: var(--gold); }
+.about-tag span { font-weight: 800; }
 [lang="ar"] .about-tag { right: 0; }
 [lang="en"] .about-tag { left: 0; }
 
