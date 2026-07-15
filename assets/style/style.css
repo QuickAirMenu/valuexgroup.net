@@ -406,31 +406,37 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 @media (max-width: 479px) { .vm-grid { grid-template-columns: 1fr; } }
 
 .vm-card {
-  padding: 2rem; background: var(--white);
+  padding: 2.25rem; background: linear-gradient(135deg, var(--ivory), var(--white));
   border: 1px solid var(--gray-200);
-  transition: all 0.35s;
+  transition: all 0.4s ease;
   position: relative; overflow: hidden;
 }
 .vm-card::before {
   content: ''; position: absolute; top: 0; bottom: 0;
-  width: 3px; background: var(--gold); transform: scaleY(0);
-  transition: transform 0.35s ease;
+  width: 4px; background: var(--gold); transform: scaleY(0);
+  transition: transform 0.4s ease;
 }
 [lang="ar"] .vm-card::before { right: 0; }
 [lang="en"] .vm-card::before { left: 0; }
 .vm-card:hover::before { transform: scaleY(1); }
-.vm-card:hover { border-color: var(--gold); box-shadow: 0 6px 24px rgba(0,0,0,0.05); }
+.vm-card:hover { border-color: var(--gold); box-shadow: 0 12px 36px rgba(0,0,0,0.07); transform: translateY(-4px); }
 
 .vm-icon {
-  width: 3rem; height: 3rem;
+  width: 3.5rem; height: 3.5rem;
+  background: var(--gold-dim);
   display: flex; align-items: center; justify-content: center;
-  color: var(--gold); font-size: 1.35rem;
-  margin-bottom: 0.75rem;
-  transition: transform 0.3s;
+  color: var(--gold); font-size: 1.4rem;
+  margin-bottom: 1.25rem;
+  transition: all 0.4s ease;
+  border: 1px solid rgba(205,170,114,0.2);
 }
-.vm-card:hover .vm-icon { transform: scale(1.1); }
-.vm-card h4 { font-size: 1.125rem; color: var(--green); margin-bottom: 0.5rem; font-family: var(--font-display); font-weight: 700; }
-.vm-card p { font-size: 0.875rem; color: var(--gray-500); line-height: 1.7; }
+.vm-card:hover .vm-icon { background: var(--gold); color: var(--green); border-color: var(--gold); transform: scale(1.05); }
+.vm-card h4 {
+  font-size: 1.2rem; color: var(--green); margin-bottom: 0.6rem;
+  font-family: var(--font-display); font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.vm-card p { font-size: 0.9rem; color: var(--gray-500); line-height: 1.75; }
 
 /* ─── SERVICES ─── */
 .svc-grid { display: grid; gap: 1px; background: var(--line-dk); border: 1px solid var(--line-dk); }
