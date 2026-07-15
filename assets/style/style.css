@@ -691,23 +691,25 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 .contact-grid { display: grid; gap: clamp(2.5rem, 6vw, 4rem); }
 @media (min-width: 1024px) { .contact-grid { grid-template-columns: 1fr 1.2fr; } }
 
-.cinfo-list { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
-.cinfo { display: flex; gap: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--line-dk); }
+.cinfo-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+.cinfo { display: flex; gap: 1rem; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 6px; transition: all 0.3s; }
+.cinfo:hover { background: rgba(255,255,255,0.06); }
 .cinfo-icon {
-  width: 2.5rem; height: 2.5rem; border: 1px solid rgba(205,170,114,0.2);
+  width: 2.75rem; height: 2.75rem; background: var(--gold-dim);
   display: flex; align-items: center; justify-content: center;
-  color: var(--gold); font-size: 1.1rem; flex-shrink: 0;
+  color: var(--gold); font-size: 1rem; flex-shrink: 0;
+  border-radius: 6px;
 }
 .cinfo span { display: block; font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.2rem; }
 .cinfo a, .cinfo span:last-child { color: rgba(255,255,255,0.75); font-size: 0.9375rem; transition: color 0.3s; }
 .cinfo a:hover { color: var(--gold); }
 
-.cform-wrap { background: var(--green-2); padding: 2rem; border: 1px solid var(--line-dk); }
+.cform-wrap { background: var(--green-2); padding: 2rem; border: 1px solid var(--line-dk); border-radius: 8px; }
 @media (min-width: 640px) { .cform-wrap { padding: 2.5rem; } }
 
 .cform h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--white); margin-bottom: 1.5rem; }
 
-.cform-toast { padding: 0.75rem 1rem; margin-bottom: 1.25rem; font-size: 0.8125rem; display: none; }
+.cform-toast { padding: 0.75rem 1rem; margin-bottom: 1.25rem; font-size: 0.8125rem; display: none; border-radius: 4px; }
 .cform-toast.success { display: block; background: rgba(40,167,69,0.12); border:1px solid rgba(40,167,69,0.25); color:#4ade80; }
 .cform-toast.error   { display: block; background: rgba(220,53,69,0.12);  border:1px solid rgba(220,53,69,0.25);  color:#f87171; }
 
@@ -720,19 +722,19 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 .req { color: #f87171; }
 
 .cform-group input, .cform-group select, .cform-group textarea {
-  width: 100%; padding: 0.75rem 0;
-  background: transparent; border: none;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
+  width: 100%; padding: 0.875rem 1rem;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
   color: var(--white); font-size: 0.9375rem;
-  outline: none; transition: border-color 0.3s;
+  outline: none; transition: all 0.3s;
 }
-.cform-group input::placeholder, .cform-group textarea::placeholder { color: rgba(255,255,255,0.2); }
-.cform-group input:focus, .cform-group select:focus, .cform-group textarea:focus { border-color: var(--gold); }
+.cform-group input::placeholder, .cform-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+.cform-group input:focus, .cform-group select:focus, .cform-group textarea:focus { border-color: var(--gold); background: rgba(255,255,255,0.08); }
 .cform-group select { color: rgba(255,255,255,0.65); appearance: none; cursor: pointer; }
 .cform-group select option { color: var(--green); background: var(--white); }
-.cform-group textarea { resize: vertical; }
+.cform-group textarea { resize: vertical; min-height: 100px; }
 
-.cform-submit { margin-top: 0.5rem; }
+.cform-submit { margin-top: 0.5rem; width: 100%; justify-content: center; }
 .cform-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
 /* ─── FOOTER ─── */
