@@ -692,6 +692,7 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 .exp-name { font-size: 0.9375rem; font-weight: 600; color: var(--green); }
 
 /* ─── CONTACT ─── */
+#contact { background: var(--green-2); }
 .contact-grid { display: grid; gap: clamp(2.5rem, 6vw, 4rem); }
 @media (min-width: 1024px) { .contact-grid { grid-template-columns: 1fr 1.2fr; } }
 
