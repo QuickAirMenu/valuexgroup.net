@@ -10,9 +10,20 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="../assets/style/style.css" />
   <style>
-    .policy-page { padding: 8rem 0 4rem; }
+    .policy-hero {
+      position: relative; height: 50vh; min-height: 320px;
+      background: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=80') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+    }
+    .policy-hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(45,45,29,0.75);
+    }
+    .policy-hero-content { position: relative; z-index: 1; }
+    .policy-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); color: var(--white); margin-bottom: 0.5rem; }
+    .policy-hero p { color: rgba(255,255,255,0.6); font-size: 0.9375rem; }
+    .policy-page { padding: 4rem 0; }
     .policy-page .container { max-width: 800px; }
-    .policy-page h1 { font-family: var(--font-display); font-size: 2rem; color: var(--green); margin-bottom: 2rem; }
     .policy-page h2 { font-family: var(--font-display); font-size: 1.25rem; color: var(--green); margin: 2rem 0 0.75rem; }
     .policy-page p, .policy-page li { font-size: 0.9375rem; color: rgba(0,0,0,0.65); line-height: 1.8; margin-bottom: 0.75rem; }
     .policy-page ul { padding-right: 1.25rem; margin-bottom: 1rem; }
@@ -24,7 +35,7 @@
 </head>
 <body>
 
-  <header class="nav" id="nav">
+  <header class="nav solid" id="nav">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
         <img class="logo-white" src="../assets/img/logo/value-x-group-logo-white.png" alt="Value X Group" />
@@ -41,11 +52,16 @@
     </div>
   </header>
 
+  <section class="policy-hero">
+    <div class="policy-hero-content">
+      <h1>الشروط والأحكام</h1>
+      <p>آخر تحديث: يناير 2026</p>
+    </div>
+  </section>
+
   <main class="policy-page">
     <div class="container">
       <a href="index.html" class="policy-back"><i class="fa-solid fa-chevron-right"></i> العودة للرئيسية</a>
-      <h1>الشروط والأحكام</h1>
-      <p>آخر تحديث: يناير 2026</p>
 
       <h2>1. القبول بالشروط</h2>
       <p>باستخدام موقعنا الإلكتروني، فإنك توافق على هذه الشروط والأحكام. إذا كنت لا توافق على أي من هذه الشروط، يرجى عدم استخدام الموقع.</p>
