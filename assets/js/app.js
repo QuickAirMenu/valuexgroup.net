@@ -44,12 +44,12 @@
   /* ─── MOBILE MENU ─── */
   navToggle.addEventListener('click', () => {
     const open = navMobile.classList.toggle('open');
-    navToggle.querySelector('i').className = open ? 'ph ph-x' : 'ph ph-list';
+    navToggle.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
   });
   document.querySelectorAll('.nav-mlink, .nav-mcta').forEach((el) => {
     el.addEventListener('click', () => {
       navMobile.classList.remove('open');
-      navToggle.querySelector('i').className = 'ph ph-list';
+      navToggle.querySelector('i').className = 'fa-solid fa-bars';
     });
   });
 
