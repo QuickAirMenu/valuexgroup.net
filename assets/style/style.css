@@ -406,22 +406,19 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 @media (max-width: 479px) { .vm-grid { grid-template-columns: 1fr; } }
 
 .vm-card {
-  padding: 1.75rem 1.5rem 1.5rem;
-  background: var(--white);
-  border: none;
-  border-top: 3px solid var(--gold);
+  padding: 1.75rem; background: var(--gray-50);
+  border-left: 3px solid var(--gold);
   transition: all 0.3s ease;
 }
-.vm-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+[lang="en"] .vm-card { border-left: 3px solid var(--gold); }
+[lang="ar"] .vm-card { border-left: none; border-right: 3px solid var(--gold); }
+.vm-card:hover { background: var(--white); box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
 
 .vm-icon {
-  width: 2.5rem; height: 2.5rem;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--gold); font-size: 1.1rem;
-  margin-bottom: 1rem;
+  display: none;
 }
 .vm-card h4 {
-  font-size: 1rem; color: var(--green); margin-bottom: 0.4rem;
+  font-size: 1rem; color: var(--green); margin-bottom: 0.35rem;
   font-family: var(--font-display); font-weight: 700;
 }
 .vm-card p { font-size: 0.8125rem; color: var(--gray-500); line-height: 1.7; }
