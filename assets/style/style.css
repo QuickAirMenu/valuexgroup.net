@@ -473,7 +473,7 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 .why-grid { display: grid; gap: clamp(2.5rem, 6vw, 4rem); }
 @media (min-width: 1024px) { .why-grid { grid-template-columns: 1fr 1fr; align-items: center; } }
 
-.why-img { position: relative; aspect-ratio: 4/5; overflow: hidden; border-radius: 2px; }
+.why-img { position: relative; aspect-ratio: 4/5; overflow: hidden; border-radius: 12px; }
 .why-img img { width: 100%; height: 100%; object-fit: cover; }
 .why-quote {
   position: absolute; inset: 0;
