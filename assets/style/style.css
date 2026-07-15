@@ -73,13 +73,14 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 .sec-dark  { background: var(--green); color: var(--white); }
 .sec-light { background: var(--ivory); }
 
-.wrap {
+.wrap,
+.container {
   width: 100%;
   max-width: 75rem;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
-@media (min-width: 768px) { .wrap { padding: 0 2.5rem; } }
+@media (min-width: 768px) { .wrap, .container { padding: 0 2.5rem; } }
 
 /* ─── TYPOGRAPHY ─── */
 .s-head {
@@ -258,12 +259,15 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
   height: 5rem;
   transition: background 0.45s ease, box-shadow 0.45s ease;
 }
-.nav.on {
+.nav.on,
+.nav.solid {
   background: rgba(255,255,255,0.96);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 1px 0 rgba(0,0,0,0.05);
 }
+.nav.solid .nav-logo .logo-white { display: none; }
+.nav.solid .nav-logo .logo-color { display: block; }
 
 .nav-inner {
   height: 100%; max-width: 75rem; margin: 0 auto;
