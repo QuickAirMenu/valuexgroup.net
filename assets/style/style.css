@@ -605,6 +605,7 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
   border: 1px solid rgba(255,255,255,0.06);
   transition: all 0.4s ease; display: flex; flex-direction: column;
   max-width: 50rem; margin: 0 auto;
+  text-align: center;
 }
 .testi-quote { font-size: 3rem; color: var(--gold); margin-bottom: 1.5rem; opacity: 0.4; line-height: 1; }
 .testi-card p {
@@ -613,7 +614,7 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
   font-style: italic;
 }
 .testi-author {
-  display: flex; align-items: center; gap: 1rem;
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
   border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem;
 }
 .testi-avatar {
@@ -630,14 +631,14 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
   margin-top: 2rem;
 }
 .testi-prev, .testi-next {
-  width: 2.75rem; height: 2.75rem;
-  border: 1px solid rgba(255,255,255,0.15);
+  width: 2.5rem; height: 2.5rem;
+  border: none;
   display: flex; align-items: center; justify-content: center;
-  color: rgba(255,255,255,0.5); font-size: 0.875rem;
+  color: rgba(255,255,255,0.2); font-size: 0.8rem;
   transition: all 0.3s;
 }
 .testi-prev:hover, .testi-next:hover {
-  border-color: var(--gold); color: var(--gold);
+  color: var(--gold);
 }
 .testi-dots { display: flex; gap: 0.5rem; }
 .testi-dot {
@@ -645,7 +646,8 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
   background: rgba(255,255,255,0.2);
   transition: all 0.3s;
 }
-.testi-dot.active { background: var(--gold); width: 24px; border-radius: 4px; }
+.testi-dot.active { background: var(--gold); width: 28px; height: 8px; border-radius: 4px; }
+.testi-dot:hover { background: rgba(205,170,114,0.5); }
 
 /* ─── SECTORS ─── */
 .exp-grid { display: grid; gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); }
