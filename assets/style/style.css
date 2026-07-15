@@ -658,25 +658,29 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 .testi-dot:hover { background: rgba(205,170,114,0.5); }
 
 /* ─── SECTORS ─── */
-.exp-grid { display: grid; gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); }
+.exp-grid { display: grid; gap: 1rem; }
 @media (min-width: 480px) { .exp-grid { grid-template-columns: repeat(2,1fr); } }
 @media (min-width: 1024px) { .exp-grid { grid-template-columns: repeat(3,1fr); } }
 
 .exp-item {
-  background: var(--white); padding: 2.25rem;
+  background: var(--white); padding: 2rem;
   display: flex; flex-direction: column; align-items: flex-start; gap: 0.875rem;
-  transition: all 0.35s;
+  transition: all 0.35s ease;
+  border: 1px solid var(--gray-200);
+  border-radius: 4px;
+  position: relative;
 }
-.exp-item:hover { background: var(--ivory); transform: translateY(-2px); }
+.exp-item:hover { border-color: var(--gold); box-shadow: 0 8px 24px rgba(0,0,0,0.06); transform: translateY(-3px); }
 .exp-icon {
-  width: 3.5rem; height: 3.5rem; background: var(--gold-dim);
+  width: 3.25rem; height: 3.25rem; background: var(--gold-dim);
   display: flex; align-items: center; justify-content: center;
-  color: var(--gold); font-size: 1.35rem; flex-shrink: 0;
-  transition: all 0.35s;
+  color: var(--gold); font-size: 1.2rem; flex-shrink: 0;
+  transition: all 0.35s ease;
+  border-radius: 4px;
 }
-.exp-item:hover .exp-icon { background: var(--gold); color: var(--green); }
+.exp-item:hover .exp-icon { background: var(--gold); color: var(--white); }
 .exp-num { font-size: 0.6875rem; letter-spacing: 0.16em; color: var(--gold-fade); font-weight: 700; }
-.exp-name { font-size: 1.0625rem; font-weight: 600; color: var(--green); }
+.exp-name { font-size: 1rem; font-weight: 600; color: var(--green); }
 
 /* ─── CONTACT ─── */
 .contact-grid { display: grid; gap: clamp(2.5rem, 6vw, 4rem); }
