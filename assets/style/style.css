@@ -658,9 +658,8 @@ html[dir="rtl"] .fa-paper-plane { transform: scaleX(-1); }
 .testi-dot:hover { background: rgba(205,170,114,0.5); }
 
 /* ─── SECTORS ─── */
-.exp-grid { display: grid; gap: 1rem; }
-@media (min-width: 480px) { .exp-grid { grid-template-columns: repeat(2,1fr); } }
-@media (min-width: 1024px) { .exp-grid { grid-template-columns: repeat(3,1fr); } }
+.exp-grid { display: grid; gap: 1rem; grid-template-columns: repeat(2,1fr); }
+@media (min-width: 1024px) { .exp-grid { grid-template-columns: repeat(2,1fr); } }
 
 .exp-item {
   background: var(--white); padding: 2rem;
