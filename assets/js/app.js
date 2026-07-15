@@ -125,6 +125,32 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
   revealEls.forEach((el) => revealObs.observe(el));
 
+  /* ─── TESTIMONIALS CAROUSEL ─── */
+  const testiSlides = document.querySelectorAll('.testi-slide');
+  const testiDots = document.querySelectorAll('.testi-dot');
+  const testiPrev = document.querySelector('.testi-prev');
+  const testiNext = document.querySelector('.testi-next');
+  let testiCurrent = 0;
+  let testiTimer;
+
+  function goTesti(idx) {
+    if (idx === testiCurrent || !testiSlides.length) return;
+    testiSlides[testiCurrent].classList.remove('active');
+    testiDots[testiCurrent].classList.remove('active');
+    testiCurrent = idx;
+    testiSlides[testiCurrent].classList.add('active');
+    testiDots[testiCurrent].classList.add('active');
+    resetTestiTimer();
+  }
+  function nextTesti() { goTesti((testiCurrent + 1) % testiSlides.length); }
+  function prevTesti() { goTesti((testiCurrent - 1 + testiSlides.length) % testiSlides.length); }
+  function resetTestiTimer() { clearInterval(testiTimer); testiTimer = setInterval(nextTesti, 6000); }
+
+  if (testiNext) testiNext.addEventListener('click', nextTesti);
+  if (testiPrev) testiPrev.addEventListener('click', prevTesti);
+  testiDots.forEach((d) => d.addEventListener('click', () => goTesti(parseInt(d.dataset.to, 10))));
+  resetTestiTimer();
+
   /* ─── CONTACT FORM ─── */
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
