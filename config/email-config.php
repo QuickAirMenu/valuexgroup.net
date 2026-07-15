@@ -1,14 +1,14 @@
 <?php
 // =====================================================
-// Email Configuration — Special Zone
-// Version 6.2 — SMTP Native (no PHPMailer)
+// Email Configuration — Value X Group
+// Version 1.0 — SMTP Native (no PHPMailer)
 // =====================================================
 
 // ─── تحميل .env ─────────────────────────────────────────────────────────────
 function sz_load_env(): void {
     $envFile = __DIR__ . '/../.env';
     if (!file_exists($envFile)) {
-        error_log('[SZ] .env not found: ' . $envFile);
+        error_log('[VX] .env not found: ' . $envFile);
         return;
     }
     foreach (file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
@@ -30,15 +30,13 @@ function _e(string $key, string $fallback = ''): string {
 }
 
 // ─── SMTP Sender — SSL port 465 ──────────────────────────────────────────────
-// $replyTo = '' : بدون Reply-To (إيميل الشركة الداخلي)
-// $replyTo = 'info@...' : العميل لو رد يذهب لـ info@ (إيميل التأكيد للعميل)
 function sz_smtp_send(string $toAddr, string $toName, string $subj, string $html, string $replyTo = ''): bool {
     $host     = _e('MAIL_HOST',      'smtp.hostinger.com');
     $port     = (int)_e('MAIL_PORT', '465');
     $user     = _e('MAIL_USERNAME');
     $pass     = _e('MAIL_PASSWORD');
     $from     = _e('MAIL_FROM');
-    $fromName = _e('MAIL_FROM_NAME', 'Special Zone');
+    $fromName = _e('MAIL_FROM_NAME', 'Value X Group');
 
     $ctx = stream_context_create(['ssl' => [
         'verify_peer'       => false,
@@ -48,7 +46,7 @@ function sz_smtp_send(string $toAddr, string $toName, string $subj, string $html
 
     $sock = @stream_socket_client("ssl://{$host}:{$port}", $errno, $errstr, 15, STREAM_CLIENT_CONNECT, $ctx);
     if (!$sock) {
-        error_log("[SZ] SMTP connect failed: {$errno} {$errstr}");
+        error_log("[VX] SMTP connect failed: {$errno} {$errstr}");
         return false;
     }
     stream_set_timeout($sock, 15);
@@ -71,7 +69,7 @@ function sz_smtp_send(string $toAddr, string $toName, string $subj, string $html
     $auth = $cmd(base64_encode($pass));
 
     if (strpos($auth, '235') === false) {
-        error_log('[SZ] Auth failed: ' . $auth);
+        error_log('[VX] Auth failed: ' . $auth);
         fclose($sock);
         return false;
     }
@@ -84,7 +82,6 @@ function sz_smtp_send(string $toAddr, string $toName, string $subj, string $html
         ? '=?UTF-8?B?' . base64_encode($toName) . "?= <{$toAddr}>"
         : $toAddr;
 
-    // Reply-To — يُضاف فقط إذا مُرِّر قيمة
     $replyToHeader = !empty($replyTo) ? "Reply-To: {$replyTo}\r\n" : '';
 
     $msg  = "From: =?UTF-8?B?" . base64_encode($fromName) . "?= <{$from}>\r\n"
@@ -94,8 +91,8 @@ function sz_smtp_send(string $toAddr, string $toName, string $subj, string $html
           . "MIME-Version: 1.0\r\n"
           . "Content-Type: text/html; charset=UTF-8\r\n"
           . "Content-Transfer-Encoding: base64\r\n"
-          . "X-Mailer: SZ-Mailer/6.2\r\n"
-          . "Message-ID: <" . time() . "." . md5($toAddr . microtime()) . "@specialzone.com.sa>\r\n"
+          . "X-Mailer: VX-Mailer/1.0\r\n"
+          . "Message-ID: <" . time() . "." . md5($toAddr . microtime()) . "@valuexgroup.net>\r\n"
           . "\r\n"
           . chunk_split(base64_encode($html))
           . "\r\n.\r\n";
@@ -105,7 +102,7 @@ function sz_smtp_send(string $toAddr, string $toName, string $subj, string $html
     fclose($sock);
 
     $ok = strpos($r, '250') !== false || strpos($r, '2.0.0') !== false;
-    if (!$ok) error_log('[SZ] Send failed: ' . $r);
+    if (!$ok) error_log('[VX] Send failed: ' . $r);
     return $ok;
 }
 
@@ -128,24 +125,24 @@ function _buildRows(array $data, array $L, string $sec): string {
 
 // ─── Template: إيميل الشركة (الداخلي) ───────────────────────────────────────
 function getEmailTemplate(array $data, string $lang = 'ar'): string {
-    $p    = _e('BRAND_PRIMARY_COLOR',   '#86A131');
-    $s    = _e('BRAND_SECONDARY_COLOR', '#1E68B2');
-    $logo = _e('BRAND_LOGO_URL',        'https://specialzone.com.sa/assets/img/logo.png');
-    $co   = $lang === 'ar' ? _e('COMPANY_NAME_AR', 'شركة سبيشال زون') : _e('COMPANY_NAME', 'Special Zone');
+    $p    = _e('BRAND_PRIMARY_COLOR',   '#CDAA72');
+    $s    = _e('BRAND_SECONDARY_COLOR', '#2D2D1D');
+    $logo = _e('BRAND_LOGO_URL',        'https://valuexgroup.net/assets/img/logo/value-x-group-logo.png');
+    $co   = $lang === 'ar' ? _e('COMPANY_NAME_AR', 'مجموعة فاليو إكس') : _e('COMPANY_NAME', 'Value X Group');
     $dir  = $lang === 'ar' ? 'rtl' : 'ltr';
 
     $L = $lang === 'ar' ? [
-        'title'   => '&#x1F4CB; طلب حجز جديد من الموقع',
+        'title'   => '&#x1F4CB; طلب استشارة جديد من الموقع',
         'name'    => 'الاسم',     'phone'   => 'الجوال',
         'email'   => 'البريد',    'company' => 'الشركة / المشروع',
-        'service' => 'الباقة',    'date'    => 'تاريخ البدء',
-        'notes'   => 'ملاحظات',   'rights'  => 'جميع الحقوق محفوظة',
+        'service' => 'الخدمة',    'date'    => 'التاريخ',
+        'notes'   => 'الرسالة',   'rights'  => 'جميع الحقوق محفوظة',
     ] : [
-        'title'   => '&#x1F4CB; New Booking Request',
+        'title'   => '&#x1F4CB; New Consultation Request',
         'name'    => 'Name',      'phone'   => 'Phone',
         'email'   => 'Email',     'company' => 'Company / Project',
-        'service' => 'Package',   'date'    => 'Start Date',
-        'notes'   => 'Notes',     'rights'  => 'All Rights Reserved',
+        'service' => 'Service',   'date'    => 'Date',
+        'notes'   => 'Message',   'rights'  => 'All Rights Reserved',
     ];
 
     $rows = _buildRows($data, $L, $s);
@@ -156,7 +153,7 @@ function getEmailTemplate(array $data, string $lang = 'ar'): string {
 <table width='100%' cellpadding='0' cellspacing='0' border='0' style='background:#f0f2f5;padding:24px 0;'>
 <tr><td align='center'>
 <table width='600' cellpadding='0' cellspacing='0' border='0' style='max-width:600px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08);'>
-  <tr><td style='background:linear-gradient(135deg,{$p} 0%,{$s} 100%);padding:30px 20px;text-align:center;'>
+  <tr><td style='background:linear-gradient(135deg,{$s} 0%,{$s} 100%);padding:30px 20px;text-align:center;'>
     <table cellpadding='0' cellspacing='0' border='0' style='background:#fff;display:inline-block;padding:10px 24px;border-radius:10px;margin-bottom:14px;'>
       <tr><td><img src='{$logo}' alt='{$co}' style='max-width:140px;height:auto;display:block;' width='140'></td></tr>
     </table>
@@ -170,7 +167,7 @@ function getEmailTemplate(array $data, string $lang = 'ar'): string {
   </td></tr>
   <tr><td style='background:#f8f9fa;padding:18px;text-align:center;border-top:1px solid #eee;'>
     <p style='margin:0 0 5px;color:#555;font-size:13px;'>{$L['rights']} &copy; {$yr} <strong style='color:{$p};'>{$co}</strong></p>
-    <p style='margin:0;font-size:11px;color:#999;'>برمجة وتصميم <a href='https://airmenu.net' target='_blank' style='color:#3db3c5;text-decoration:none;font-weight:700;'>Air Menu</a></p>
+    <p style='margin:0;font-size:11px;color:#999;'>برمجة وتصميم <a href='https://airmenu.net' target='_blank' style='color:#CDAA72;text-decoration:none;font-weight:700;'>Air Menu</a></p>
   </td></tr>
 </table>
 </td></tr>
@@ -180,42 +177,42 @@ function getEmailTemplate(array $data, string $lang = 'ar'): string {
 
 // ─── Template: تأكيد للعميل ──────────────────────────────────────────────────
 function getConfirmationEmailTemplate(array $data, string $lang = 'ar'): string {
-    $p    = _e('BRAND_PRIMARY_COLOR',   '#86A131');
-    $s    = _e('BRAND_SECONDARY_COLOR', '#1E68B2');
-    $logo = _e('BRAND_LOGO_URL',        'https://specialzone.com.sa/assets/img/logo.png');
-    $web  = _e('BRAND_WEBSITE',         'SpecialZone.com.sa');
-    $coEm = _e('COMPANY_EMAIL',         'info@SpecialZone.com.sa');
-    $co   = $lang === 'ar' ? _e('COMPANY_NAME_AR', 'شركة سبيشال زون') : _e('COMPANY_NAME', 'Special Zone');
+    $p    = _e('BRAND_PRIMARY_COLOR',   '#CDAA72');
+    $s    = _e('BRAND_SECONDARY_COLOR', '#2D2D1D');
+    $logo = _e('BRAND_LOGO_URL',        'https://valuexgroup.net/assets/img/logo/value-x-group-logo.png');
+    $web  = _e('BRAND_WEBSITE',         'valuexgroup.net');
+    $coEm = _e('COMPANY_EMAIL',         'info@valuexgroup.net');
+    $co   = $lang === 'ar' ? _e('COMPANY_NAME_AR', 'مجموعة فاليو إكس') : _e('COMPANY_NAME', 'Value X Group');
     $dir  = $lang === 'ar' ? 'rtl' : 'ltr';
     $e    = fn($v) => htmlspecialchars((string)($v ?? ''), ENT_QUOTES, 'UTF-8');
 
     $L = $lang === 'ar' ? [
         'title'    => 'شكراً لتواصلك معنا! &#x1F389;',
         'greeting' => 'عزيزنا',
-        'confirm'  => 'تم استلام طلبك بنجاح. سيتواصل معك فريقنا خلال 24 ساعة لتأكيد الحجز.',
+        'confirm'  => 'تم استلام طلبك بنجاح. سيتواصل معك فريقنا خلال 24 ساعة.',
         'copy'     => 'نسخة من طلبك',
         'name'     => 'الاسم',     'phone'   => 'الجوال',
         'email'    => 'البريد',    'company' => 'الشركة / المشروع',
-        'service'  => 'الباقة',    'date'    => 'تاريخ البدء',
-        'notes'    => 'ملاحظات',
-        'note'     => '&#x1F4AC; للرد على هذا الإيميل، سيصل ردك مباشرة إلى فريق سبيشال زون.',
-        'hours'    => '&#x1F550; أوقات العمل: السبت &#x2013; الخميس | 8 ص &#x2013; 10 م',
+        'service'  => 'الخدمة',    'date'    => 'التاريخ',
+        'notes'    => 'الرسالة',
+        'note'     => '&#x1F4AC; للرد على هذا الإيميل، سيصل ردك مباشرة إلى فريق فاليو إكس.',
+        'hours'    => '&#x1F550; أوقات العمل: الأحد &#x2013; الخميس | 9 ص &#x2013; 5 م',
         'regards'  => 'مع أطيب التحيات،',
-        'team'     => 'فريق سبيشال زون',
+        'team'     => 'فريق فاليو إكس',
         'rights'   => 'جميع الحقوق محفوظة',
     ] : [
         'title'    => 'Thank you for contacting us! &#x1F389;',
         'greeting' => 'Dear',
-        'confirm'  => 'Your booking request has been received. Our team will contact you within 24 hours.',
+        'confirm'  => 'Your request has been received. Our team will contact you within 24 hours.',
         'copy'     => 'Copy of your request',
         'name'     => 'Name',      'phone'   => 'Phone',
         'email'    => 'Email',     'company' => 'Company / Project',
-        'service'  => 'Package',   'date'    => 'Start Date',
-        'notes'    => 'Notes',
-        'note'     => '&#x1F4AC; Replying to this email will reach the Special Zone team directly.',
-        'hours'    => '&#x1F550; Working Hours: Sat &#x2013; Thu | 8 AM &#x2013; 10 PM',
+        'service'  => 'Service',   'date'    => 'Date',
+        'notes'    => 'Message',
+        'note'     => '&#x1F4AC; Replying to this email will reach the Value X team directly.',
+        'hours'    => '&#x1F550; Working Hours: Sun &#x2013; Thu | 9 AM &#x2013; 5 PM',
         'regards'  => 'Best regards,',
-        'team'     => 'Special Zone Team',
+        'team'     => 'Value X Team',
         'rights'   => 'All Rights Reserved',
     ];
 
@@ -228,7 +225,7 @@ function getConfirmationEmailTemplate(array $data, string $lang = 'ar'): string 
 <tr><td align='center'>
 <table width='600' cellpadding='0' cellspacing='0' border='0' style='max-width:600px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08);'>
 
-  <tr><td style='background:linear-gradient(135deg,{$p} 0%,{$s} 100%);padding:30px 20px;text-align:center;'>
+  <tr><td style='background:linear-gradient(135deg,{$s} 0%,{$s} 100%);padding:30px 20px;text-align:center;'>
     <table cellpadding='0' cellspacing='0' border='0' style='background:#fff;display:inline-block;padding:10px 24px;border-radius:10px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,.12);'>
       <tr><td><img src='{$logo}' alt='{$co}' style='max-width:140px;height:auto;display:block;' width='140'></td></tr>
     </table>
@@ -243,7 +240,7 @@ function getConfirmationEmailTemplate(array $data, string $lang = 'ar'): string 
         {$L['greeting']} <strong style='color:{$p};'>{$e($data['name'])}</strong>،
       </td></tr>
 
-      <tr><td style='background:linear-gradient(135deg,#f0f8e8,#e8f4e8);padding:15px 18px;border-radius:10px;border-right:5px solid {$p};color:#2d5a0e;font-size:15px;line-height:1.8;'>
+      <tr><td style='background:linear-gradient(135deg,#f8f4e8,#f0ece0);padding:15px 18px;border-radius:10px;border-right:5px solid {$p};color:#2D2D1D;font-size:15px;line-height:1.8;'>
         &#x2705; {$L['confirm']}
       </td></tr>
 
@@ -280,7 +277,7 @@ function getConfirmationEmailTemplate(array $data, string $lang = 'ar'): string 
 
   <tr><td style='background:#f8f9fa;padding:18px;text-align:center;border-top:1px solid #eee;'>
     <p style='margin:0 0 5px;color:#555;font-size:13px;'>{$L['rights']} &copy; {$yr} <strong style='color:{$p};'>{$co}</strong></p>
-    <p style='margin:0;font-size:11px;color:#999;'>برمجة وتصميم <a href='https://airmenu.net' target='_blank' style='color:#3db3c5;text-decoration:none;font-weight:700;'>Air Menu</a></p>
+    <p style='margin:0;font-size:11px;color:#999;'>برمجة وتصميم <a href='https://airmenu.net' target='_blank' style='color:#CDAA72;text-decoration:none;font-weight:700;'>Air Menu</a></p>
   </td></tr>
 
 </table>
@@ -292,21 +289,19 @@ function getConfirmationEmailTemplate(array $data, string $lang = 'ar'): string 
 // ─── Public API ───────────────────────────────────────────────────────────────
 function sendEmail(array $data, string $lang = 'ar'): bool {
     $to   = _e('MAIL_TO');
-    $name = $lang === 'ar' ? _e('COMPANY_NAME_AR', 'سبيشال زون') : _e('COMPANY_NAME', 'Special Zone');
-    $subj = ($lang === 'ar' ? 'طلب حجز: ' : 'Booking: ')
+    $name = $lang === 'ar' ? _e('COMPANY_NAME_AR', 'فاليو إكس') : _e('COMPANY_NAME', 'Value X Group');
+    $subj = ($lang === 'ar' ? 'طلب استشارة: ' : 'Consultation: ')
           . ($data['service'] ?? '') . ' — ' . $name;
-    if (empty($to)) { error_log('[SZ] MAIL_TO not set'); return false; }
-    // إيميل الشركة الداخلي — بدون Reply-To
+    if (empty($to)) { error_log('[VX] MAIL_TO not set'); return false; }
     return sz_smtp_send($to, $name, $subj, getEmailTemplate($data, $lang));
 }
 
 function sendConfirmationEmail(array $data, string $lang = 'ar'): bool {
     if (empty($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) return false;
     $subj = $lang === 'ar'
-        ? '✓ تأكيد استلام طلبك — سبيشال زون'
-        : '✓ Booking Received — Special Zone';
-    // Reply-To: info@ — لو العميل رد على الإيميل يصل لـ info وليس site
-    $replyTo = _e('COMPANY_EMAIL', 'info@SpecialZone.com.sa');
+        ? '✓ تأكيد استلام طلبك — فاليو إكس'
+        : '✓ Request Received — Value X Group';
+    $replyTo = _e('COMPANY_EMAIL', 'info@valuexgroup.net');
     return sz_smtp_send($data['email'], $data['name'], $subj, getConfirmationEmailTemplate($data, $lang), $replyTo);
 }
 ?>

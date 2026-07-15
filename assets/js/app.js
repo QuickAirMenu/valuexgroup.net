@@ -182,8 +182,9 @@
     fd.append('message', msg);
 
     try {
-      const res = await fetch('../send.php', { method: 'POST', body: fd });
       const isAr = document.documentElement.lang === 'ar';
+      const url = isAr ? '../send-email-ar.php' : '../send-email-en.php';
+      const res = await fetch(url, { method: 'POST', body: fd });
       if (res.ok) {
         showToast(isAr ? 'تم استلام طلبك بنجاح. سيتواصل معك فريق فاليو إكس خلال 24 ساعة.' : 'Your request has been received. A Value X advisor will contact you within 24 hours.', 'success');
         contactForm.reset();

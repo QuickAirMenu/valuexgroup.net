@@ -16,21 +16,21 @@ if (isset($_SESSION['last_form_hash']) && $_SESSION['last_form_hash'] === $hash)
     http_response_code(429); die('This request has already been submitted.');
 }
 
-// Receive & sanitize — all form fields
+// Receive & sanitize
 $name    = strip_tags(trim($_POST['name']    ?? ''));
 $phone   = strip_tags(trim($_POST['phone']   ?? ''));
 $email   = trim($_POST['email']              ?? '');
-$company = strip_tags(trim($_POST['company'] ?? ''));
+$company = strip_tags(trim($_POST['organization'] ?? ''));
 $service = strip_tags(trim($_POST['service'] ?? ''));
 $date    = strip_tags(trim($_POST['date']    ?? ''));
-$notes   = strip_tags(trim($_POST['notes']   ?? ''));
+$notes   = strip_tags(trim($_POST['message']   ?? ''));
 
-if (empty($name) || empty($phone) || empty($service)) {
+if (empty($name) || empty($email)) {
     http_response_code(400);
-    die('Please fill required fields: name, phone, and package.');
+    die('Please fill required fields: name and email.');
 }
 
-if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400); die('Invalid email address.');
 }
 
